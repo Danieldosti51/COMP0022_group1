@@ -14,8 +14,17 @@ services:
     db:
         image: mysql:latest
         environment:
+            MYSQL_DATABASE: db
             MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: user
+            MYSQL_PASSWORD: password
+        command: --secure_file_priv=""
         ports:
             - "3306:3306"
+        restart: always
         volumes:
             - ./dataset:/data
+            - ./schema.sql:/docker-entrypoint-initdb.d/1_schema.sql
+            - ./data.sql:/docker-entrypoint-initdb.d/2_data.sql
+        cap_add:
+            - SYS_NICE

@@ -28,3 +28,14 @@ services:
             - ./data.sql:/docker-entrypoint-initdb.d/2_data.sql
         cap_add:
             - SYS_NICE
+
+    app:
+        depends_on:
+         - db
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin
+        restart: always
+        ports:
+            - '5000:80'
+        environment:
+            PMA_HOST: db

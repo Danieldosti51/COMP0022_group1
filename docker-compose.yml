@@ -10,6 +10,7 @@ services:
             - default
         depends_on:
             - db
+        command: "/bin/sh -c 'docker-php-ext-install mysqli && exec docker-php-entrypoint apache2-foreground'"
 
     db:
         image: mysql:latest

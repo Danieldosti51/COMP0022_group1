@@ -1,26 +1,14 @@
 <html>
-	<?php
-
-		$dbhost = "db";
-		$dbuser = "root";
-		$dbpass = "root";
-		$db = "db";
-
-		$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $db) or die ("Connection failed: %s\n". $conn -> error);
-
-	?>
-	<h1>Movie Titles!!</h1>
-	<article>
-		<?php 
-		$res = $conn->query("SELECT * FROM movies") or die($conn->error);
-		$rows = $res->num_rows;
-
-		while ($row = $res->fetch_assoc()) {
-			echo 
-			"<section>
-				<h2>{$row['title']}</h2>
-			</section>";
-		}
-		?>
-	</article>
+	<head>
+		<title>Movies</title>
+	</head>
+	<?php include_once("connection.php") ?>
+	<main>
+		<h1>Movies!!</h1>
+		<form name="searchbar" method="get">
+			<input type="text" name="q" placeholder="Search" required pattern=".*\S.*" />
+			<button type="submit">Submit</button>
+		</form>
+		<?php include_once("movielist.php") ?>		
+	</main>
 <html>

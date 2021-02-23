@@ -18,30 +18,8 @@ import numpy
 df = pd.read_csv("Dataset/movies.csv")
 #print(df)
 
-#test in one row 
-# title = title[1:-1]
-# print(df.title[1511])
-# print(df.title[1512][0])
-# print(df.title[1512][1:-1])
-
-#add a year column
-df.insert(2,"year",'')
-
-def trucate_year_out_of_title(df):
-    for i in df.index:
-        title = df.at[i,"title"]
-        title_without_year = title[:-6]
-        df.at[i,"title"] = title_without_year
-        year_of_publication = title[-5:-1]
-        #print("index:",i, "Year:", year_of_publication, "type of year:",type(year_of_publication))
-        df.at[i,"year"] = year_of_publication
-    #return df
-    
-trucate_year_out_of_title(df)
-
-#1.2
-def create_new_table_for_genres():
-    df = pd.DataFrame( {"genres ID": list(range(1,20)),
+df_g = pd.DataFrame( {
+    "genres ID": list(range(1,20)),
     "genre names":
         ["Action",
          "Adventure",
@@ -63,13 +41,57 @@ def create_new_table_for_genres():
          "Western",
          "(no genres listed)"
         ]})
-    df.to_csv('Dataset/Genres.csv',header = "genres", index=False)
+
+
+#add a year column
+df.insert(2,"year",'')
+
+def trucate_year_out_of_title(df):
+    for i in df.index:
+        title = df.at[i,"title"]
+        title_without_year = title[:-6]
+        df.at[i,"title"] = title_without_year
+        year_of_publication = title[-5:-1]
+        #print("index:",i, "Year:", year_of_publication, "type of year:",type(year_of_publication))
+        df.at[i,"year"] = year_of_publication
+    #return df
+    
+trucate_year_out_of_title(df)
+
+#1.2
+def create_new_table_for_genres():
+    df_g.to_csv('Dataset/genres.csv',header = "genres", index=False)
     
 create_new_table_for_genres()
         
-#def create_table_movie
+        
 
 
-print(df)
+def create_table_movieID_to_geresID():
+    cols =["movie ID","genre name"]
+    df_mID_gID = pd.DataFrame(columns = cols,index = False )
+    #df read the movie.csv
+    for i in df.index:
+        #for each genre in all the genres of each movie
+        genres_of_each_movie = df.at[i,"genres"]
+        for current_genre in genres_of_each_movie.split("|"):
+            #if they are in the list of df_g, create a row for the movie ID and
+            # the corresponding genre ID in the table
+            #print(genre)
 
-df.to_csv('Dataset/normalised_movie.csv',index=False)
+            if current_genre in df_g["genre names"].tolist():
+                #print("the genre " + current_genre + "is in the genres list")
+                #To improve efficiency use pd.concat()
+                new_row = [i,current_genre]
+                new_df = pd.DataFrame([new_row],columns = cols)
+                #print(new_df)
+                df_mID_gID=pd.concat([df_mID_gID,new_df])
+                
+                
+    df_mID_gID.to_csv('Dataset/movieID_genreName.csv')
+
+create_table_movieID_to_geresID()
+
+print(df_g["genre names"].tolist())
+
+#df.to_csv('Dataset/normalised_movie.csv',index=False)

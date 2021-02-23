@@ -9,9 +9,11 @@
 	$rows = $res->num_rows;
 
 	while ($row = $res->fetch_assoc()) {
+		$id = $row['movieId'];
+		$link = "/movie.php?id=$id";
 		echo 
 		"<section class='movie'>
-			<h2>{$row['title']}</h2>
+			<a href={$link}><h2>{$row['title']}</h2></a>
 		</section>";
 	}
 ?>

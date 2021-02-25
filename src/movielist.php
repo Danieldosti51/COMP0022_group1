@@ -2,8 +2,30 @@
 <?php 
 	$query = "SELECT * FROM movies";
 	if (isset($_REQUEST['q'])) {
+		$order = $_REQUEST['Order'];
 		$param = filter_var($_REQUEST['q'], FILTER_SANITIZE_STRING);
-		$query = "SELECT * FROM movies WHERE title LIKE '%" . $param . "%'";
+		if ($order === "Latest") {
+			$query = "SELECT * FROM movies WHERE title LIKE '%" . $param . "%' ORDER BY year DESC";
+		} elseif ($order === "Controversial") {
+			$query = "SELECT movieId, title, year, VARIANCE(rating) as var FROM 
+			(SELECT m.movieId, m.title, m.year, r.rating
+			FROM movies m, ratings r
+			WHERE r.movieId = m.movieId) AS sub
+			WHERE title LIKE '%" . $param . "%'
+			GROUP BY movieId
+			ORDER BY var ASC;";
+		} elseif ($order === "Popular") {
+			$query = "SELECT movieId, title, year, COUNT(rating) as count FROM 
+			(SELECT m.movieId, m.title, m.year, r.rating
+			FROM movies m, ratings r
+			WHERE r.movieId = m.movieId
+			AND rating >= 4) AS sub
+			WHERE title LIKE '%" . $param . "%'
+			GROUP BY movieId
+			ORDER BY count DESC;";
+		} else {
+			$query = "SELECT * FROM movies WHERE title LIKE '%" . $param . "%'";
+		}
 	}
 	$res = $conn->query($query) or die($conn->error);
 	$rows = $res->num_rows;

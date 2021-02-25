@@ -15,6 +15,7 @@
 				echo "<h2>{$movie_row['title']}</h2>";
 
 				include_once('ratings.php');
+				include_once('suggestions.php');
 			}
 		?>
 	</main>

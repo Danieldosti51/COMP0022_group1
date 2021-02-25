@@ -1,6 +1,9 @@
 <article id="suggestions">
 <h3>Users also liked:</h3>
 <?php 
+	
+	// Selects all movies that users have also liked 
+	// (We assume a user likes a movie if they rate it at least 4)
 	$query = 
 		"SELECT m.movieId, m.title, m.year, COUNT(m.movieId) as freq
 		FROM movies m, ratings r

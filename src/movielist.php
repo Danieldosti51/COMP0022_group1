@@ -7,6 +7,8 @@
 		if ($order === "Latest") {
 			$query = "SELECT * FROM movies WHERE title LIKE '%" . $param . "%' ORDER BY year DESC";
 		} elseif ($order === "Controversial") {
+
+			// A movie is controversial if there is a high variance in its ratings
 			$query = "SELECT movieId, title, year, VARIANCE(rating) as var FROM 
 			(SELECT m.movieId, m.title, m.year, r.rating
 			FROM movies m, ratings r
@@ -15,6 +17,9 @@
 			GROUP BY movieId
 			ORDER BY var ASC;";
 		} elseif ($order === "Popular") {
+
+			// A movie is popular if a large amount of people 'like' it
+			// We assume that a user likes a movie if they rate it at least 4
 			$query = "SELECT movieId, title, year, COUNT(rating) as count FROM 
 			(SELECT m.movieId, m.title, m.year, r.rating
 			FROM movies m, ratings r

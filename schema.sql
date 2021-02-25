@@ -4,15 +4,23 @@ CREATE DATABASE IF NOT EXISTS db;
 USE db;
 
 CREATE TABLE IF NOT EXISTS movies (
-	movieId int,
+    movieId int,
     title varchar(255) NOT NULL,
-    genres varchar(255) NOT NULL,
+    year int,
     PRIMARY KEY (movieId)
 );
 
+/*
+CREATE TABLE IF NOT EXISTS movie_genres (
+    movieId int NOT NULL,
+    genre varchar(255) NOT NULL,
+    FOREIGN KEY (movieId) REFERENCES movies(movieId)
+);
+*/
+
 CREATE TABLE IF NOT EXISTS links (
-	linkId int AUTO_INCREMENT,
-	movieId int,
+    linkId int AUTO_INCREMENT,
+    movieId int,
     imdbId int DEFAULT NULL,
     tmdbId int DEFAULT NULL,
     PRIMARY KEY (linkId),
@@ -20,8 +28,8 @@ CREATE TABLE IF NOT EXISTS links (
 );
 
 CREATE TABLE IF NOT EXISTS ratings (
-	ratingId int AUTO_INCREMENT,
-	userId int NOT NULL,
+    ratingId int AUTO_INCREMENT,
+    userId int NOT NULL,
     movieId int,
     rating int NOT NULL,
     rating_time int NOT NULL,
@@ -30,8 +38,8 @@ CREATE TABLE IF NOT EXISTS ratings (
 );
 
 CREATE TABLE IF NOT EXISTS tags (
-	tagId int AUTO_INCREMENT,
-	userId int NOT NULL,
+    tagId int AUTO_INCREMENT,
+    userId int NOT NULL,
     movieId int,
     tag varchar(255) NOT NULL,
     tag_time int NOT NULL,

@@ -1,9 +1,10 @@
-LOAD DATA INFILE '/data/movies.csv'
+LOAD DATA INFILE '/data/normalised_movies.csv'
 INTO TABLE movies
 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
-(movieId, title, genres);
+(@dummy, movieId, title, @year, @dummy)
+SET year = NULLIF(@year, '');
 
 LOAD DATA INFILE '/data/links.csv'
 INTO TABLE links

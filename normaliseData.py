@@ -48,19 +48,22 @@ df.insert(2,"year",'')
 
 def trucate_year_out_of_title(df):
     for i in df.index:
-        title = df.at[i,"title"]
-        title_without_year = title[:-6]
-        df.at[i,"title"] = title_without_year
-        year_of_publication = title[-5:-1]
-        #print("index:",i, "Year:", year_of_publication, "type of year:",type(year_of_publication))
-        df.at[i,"year"] = year_of_publication
-    #return df
+        title = df.at[i,"title"].strip()
+        if title[-1] == ')':
+            title_without_year = title[:-6]
+            df.at[i,"title"] = title_without_year
+            year_of_publication = title[-5:-1]
+            df.at[i,"year"] = year_of_publication
+        else:
+            df.at[i,"title"] = title
+            df.at[i,"year"] = ''
+    df.to_csv('Dataset/normalised_movie.csv')
     
 trucate_year_out_of_title(df)
 
 #1.2
 def create_new_table_for_genres():
-    df_g.to_csv('Dataset/genres.csv',header = "genres", index=False)
+    df_g.to_csv('Dataset/genres.csv',header = "genres")
     
 create_new_table_for_genres()
         
@@ -69,7 +72,7 @@ create_new_table_for_genres()
 
 def create_table_movieID_to_geresID():
     cols =["movie ID","genre name"]
-    df_mID_gID = pd.DataFrame(columns = cols,index = False )
+    df_mID_gID = pd.DataFrame(columns = cols)
     #df read the movie.csv
     for i in df.index:
         #for each genre in all the genres of each movie
@@ -88,7 +91,7 @@ def create_table_movieID_to_geresID():
                 df_mID_gID=pd.concat([df_mID_gID,new_df])
                 
                 
-    df_mID_gID.to_csv('Dataset/movieID_genreName.csv')
+    df_mID_gID.to_csv('Dataset/movie_genres.csv')
 
 create_table_movieID_to_geresID()
 

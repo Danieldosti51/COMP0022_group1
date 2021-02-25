@@ -15,7 +15,7 @@
 			WHERE r.movieId = m.movieId) AS sub
 			WHERE title LIKE '%" . $param . "%'
 			GROUP BY movieId
-			ORDER BY var ASC;";
+			ORDER BY var DESC;";
 		} elseif ($order === "Popular") {
 
 			// A movie is popular if a large amount of people 'like' it

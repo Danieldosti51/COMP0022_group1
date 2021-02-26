@@ -12,7 +12,9 @@
 				echo "This movie does not exist";
 			} else {
 				$movie_row = $res->fetch_assoc();
+				$genres = str_replace("|", ", ", $movie_row["genres"]);
 				echo "<h2>{$movie_row['title']}</h2>";
+				echo "<span id='genres'>{$genres}</span>";
 
 				include_once('ratings.php');
 				include_once('suggestions.php');

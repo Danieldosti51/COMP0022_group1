@@ -1,0 +1,35 @@
+.header {
+    overflow: hidden;
+    text-align: left;
+    background: hsl(216, 97%, 34%);
+    color: white;
+    font-size:15px;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+
+}
+.menubar {
+    overflow: hidden;
+    background-color: hsl(231, 60%, 56%);
+    position: fixed; /* Set the navbar to fixed position */
+    top: 60px;
+    width: 100%; /* Full width */
+}
+.searchbar {
+    float: right;
+    border: none;
+    margin-top: 10px;
+    margin-right: 16px;
+    font-size: 20px;
+}
+
+table {
+    margin-top: 120px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+}
+
+tr:nth-child(even) {
+    background-color: #d7d7d7;
+}

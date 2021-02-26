@@ -1,10 +1,15 @@
 <html>
 	<head>
 		<title>Movies</title>
+		<link rel ="stylesheet" type = "text/css" href = "css/index_style.css"> 
 	</head>
 	<?php include_once("connection.php") ?>
 	<main>
-		<h1>Movies!!</h1>
+	<div class="header">
+		<h1>Movies</h1>
+	</div>
+	<div class="menubar">
+		<div class="searchbar">
 		<form name="searchbar" method="get">
 			<input type="text" name="q" placeholder="Search" />
 			<select name="Order">
@@ -15,6 +20,8 @@
 			</select>
 			<button type="submit">Submit</button>
 		</form>
-		<?php include_once("movielist.php") ?>		
+		</div>
+	</div>
+		<?php include_once("movielist.php") ?>	
 	</main>
 <html>

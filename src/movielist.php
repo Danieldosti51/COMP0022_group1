@@ -35,13 +35,14 @@
 	$res = $conn->query($query) or die($conn->error);
 	$rows = $res->num_rows;
 
+	echo "<table>";
 	while ($row = $res->fetch_assoc()) {
 		$id = $row['movieId'];
 		$link = "/movie.php?id=$id";
-		echo 
-		"<section class='movie'>
-			<a href={$link}><h2>{$row['title']}</h2></a>
-		</section>";
+		echo "<tr>";
+		echo "<td> <a href={$link}><h3>{$row['title']}</h3></a> </td>"; 
+		echo "</tr>";
 	}
+	echo "</table>";
 ?>
 </article>

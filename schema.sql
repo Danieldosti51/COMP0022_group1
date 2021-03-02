@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS movies (
     movieId int,
     title varchar(255) NOT NULL,
     year int,
+    genres varchar(255) NOT NULL,
     PRIMARY KEY (movieId)
 );
 

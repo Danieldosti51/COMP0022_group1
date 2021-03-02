@@ -3,7 +3,7 @@ INTO TABLE movies
 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
-(@dummy, movieId, title, @year, @dummy)
+(@dummy, movieId, title, @year, genres)
 SET year = NULLIF(@year, '');
 
 LOAD DATA INFILE '/data/links.csv'

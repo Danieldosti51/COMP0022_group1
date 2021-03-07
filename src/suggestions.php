@@ -18,8 +18,8 @@
 	if ($res->num_rows != 0) {
 		echo "<h3>Users also liked:</h3>";
 		while ($row = $res->fetch_assoc()) {
-			$id = $row['movieId'];
-			$link = "/movie.php?id=$id";
+			$movie_id = $row['movieId'];
+			$link = "/movie.php?id=$movie_id";
 			echo 
 			"<section class='movie_suggestion'>
 				<a href={$link}>{$row['title']}</a>

@@ -39,6 +39,7 @@
 
 							include_once('ratings.php');
 							include_once('suggestions.php');
+							include_once('predictions.php')
 							echo "</div>";
 						}
 						echo "</row>"

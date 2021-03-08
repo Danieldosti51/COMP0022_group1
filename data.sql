@@ -1,3 +1,4 @@
+/*
 LOAD DATA INFILE '/data/normalised_movies.csv'
 INTO TABLE movies
 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
@@ -5,6 +6,29 @@ LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (@dummy, movieId, title, @year, genres)
 SET year = NULLIF(@year, '');
+*/
+
+LOAD DATA INFILE '/data/normalised_movies.csv'
+INTO TABLE movies
+FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(movieId, title, @vyear)
+SET year = NULLIF(@vyear, '' or ' ');
+
+LOAD DATA INFILE '/data/genreID_to_genreName.csv'
+INTO TABLE genres
+FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(genreId, genre);
+
+LOAD DATA INFILE '/data/movieID_to_genreID.csv'
+INTO TABLE movie_genres
+FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(movieId, genreId);
 
 LOAD DATA INFILE '/data/links.csv'
 INTO TABLE links

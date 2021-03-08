@@ -3,6 +3,7 @@ ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'root';
 CREATE DATABASE IF NOT EXISTS db;
 USE db;
 
+/*
 CREATE TABLE IF NOT EXISTS movies (
     movieId int,
     title varchar(255) NOT NULL,
@@ -10,14 +11,27 @@ CREATE TABLE IF NOT EXISTS movies (
     genres varchar(255) NOT NULL,
     PRIMARY KEY (movieId)
 );
+*/
 
-/*
+CREATE TABLE IF NOT EXISTS movies (
+    movieId int NOT NULL,
+    title varchar(255) NOT NULL,
+    year int,
+    PRIMARY KEY (movieId)
+);
+
+CREATE TABLE IF NOT EXISTS genres (
+    genreId int NOT NULL,
+    genre varchar(255) NOT NULL,
+    PRIMARY KEY (genreId)
+);
+
 CREATE TABLE IF NOT EXISTS movie_genres (
     movieId int NOT NULL,
-    genre varchar(255) NOT NULL,
-    FOREIGN KEY (movieId) REFERENCES movies(movieId)
+    genreId int NOT NULL,
+    FOREIGN KEY (movieId) REFERENCES movies(movieId),
+    FOREIGN KEY (genreId) REFERENCES genres(genreId)
 );
-*/
 
 CREATE TABLE IF NOT EXISTS links (
     linkId int AUTO_INCREMENT,

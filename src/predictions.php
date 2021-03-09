@@ -7,8 +7,6 @@
 		WHERE r.movieId = t.movieId
 		AND r.userId = t.userId;";
 
-	echo $pred_rating_query;
-
 	$res_avg = $conn -> query($pred_rating_query);
 	if ($res_avg->num_rows != 0) {
 		$row = $res_avg->fetch_assoc();

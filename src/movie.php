@@ -19,7 +19,7 @@
 						<ul class="navbar-nav mr-auto">
 						</ul>
 								
-						<button type="button" class="btn btn-outline-light pull-right">Back</button>
+						<button type="button" class="btn btn-outline-light pull-right" href="index.php">Back</button>
 					</nav>
 				</div>
 					<?php 
@@ -39,7 +39,7 @@
 
 							include_once('ratings.php');
 							include_once('suggestions.php');
-							include_once('predictions.php')
+							include_once('predictions.php');
 							echo "</div>";
 						}
 						echo "</row>"

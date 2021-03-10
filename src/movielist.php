@@ -51,7 +51,7 @@
 			}
 			elseif($order === "Controversy"){
 				$query = "SELECT movieId, title, year, VARIANCE(rating) as var FROM 
-				(SELECT m.movieId, m.title, m.year, r.rating, g.genre
+				(SELECT m.movieId, m.title, m.year, r.rating
 				FROM movies m, ratings r, genres g, movie_genres mg
 				WHERE r.movieId = m.movieId
                 AND m.movieId = mg.movieId
@@ -62,7 +62,7 @@
 			}
 			elseif($order === "Popularity"){
 				$query = "SELECT movieId, title, year, COUNT(rating) as 'count' FROM 
-				(SELECT m.movieId, m.title, m.year, r.rating, g.genre
+				(SELECT m.movieId, m.title, m.year, r.rating
 				FROM movies m, ratings r,genres g, movie_genres mg
 				WHERE r.movieId = m.movieId
                 AND m.movieId = mg.movieId
@@ -91,6 +91,25 @@
 			} elseif ($order === "Alphabetical") {
 				$query = "SELECT * FROM movies WHERE movieID IN 
 				(SELECT movieID FROM tags WHERE tag LIKE '%" . $param . "%') ORDER BY title $use_order";
+			} elseif ($order === "Controversy") {
+				$query = "SELECT movieId, title, year, VARIANCE(rating) as var FROM 
+				(SELECT m.movieId, m.title, m.year, r.rating
+				FROM movies m, ratings r, tags t
+				WHERE r.movieId = m.movieId
+                AND m.movieId = t.movieId
+                AND t.tag LIKE '%" . $param . "%') AS sub
+				GROUP BY movieId
+				ORDER BY var $use_order";
+			} elseif ($order === "Popularity") {
+				$query = "SELECT movieId, title, year, COUNT(rating) as 'count' FROM 
+				(SELECT m.movieId, m.title, m.year, r.rating
+				FROM movies m, ratings r,tags t
+				WHERE r.movieId = m.movieId
+                AND m.movieId = t.movieId
+				AND rating >= 4
+                AND t.tag LIKE '%" . $param . "%') AS sub
+				GROUP BY movieId
+				ORDER BY count $use_order";
 			} else {
 				$query = "SELECT * FROM movies WHERE movieID IN 
 				(SELECT movieID FROM tags WHERE tag LIKE '%" . $param . "%')" ;

@@ -67,11 +67,7 @@
 				WHERE m.movieId = mg.movieId AND mg.genreId = g.genreId AND g.genre LIKE '%" . $param . "%'";
 			}
 			
-		} 
-
-
-
-		if ($category === "Tag") {
+		} elseif ($category === "Tag") {
 			if ($order === "ReleaseYr") {
 				$query = "SELECT * FROM movies WHERE movieID IN 
 				(SELECT movieID FROM tags WHERE tag LIKE '%" . $param . "%') ORDER BY year $use_order";
@@ -83,8 +79,6 @@
 				(SELECT movieID FROM tags WHERE tag LIKE '%" . $param . "%')" ;
 			}
 		}
-
-
 		
 	}
 	$res = $conn->query($query) or die($conn->error);

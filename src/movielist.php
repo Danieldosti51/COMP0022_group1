@@ -14,39 +14,62 @@
 		}
 
 		if ($category ==="Name"){
-			$use_where = 'title';
+			if ($order === "ReleaseYr") {
+				$query = "SELECT * FROM movies WHERE title LIKE '%" . $param . "%' ORDER BY year $use_order";
+			} elseif ($order === "Controversy") {
+				// A movie is controversial if there is a high variance in its ratings
+				$query = "SELECT movieId, title, year, genres, VARIANCE(rating) as var FROM 
+				(SELECT m.movieId, m.title, m.year, m.genres, r.rating
+				FROM movies m, ratings r
+				WHERE r.movieId = m.movieId) AS sub
+				WHERE title LIKE '%" . $param . "%'
+				GROUP BY movieId
+				ORDER BY var $use_order;";
+			} elseif ($order === "Popularity") {	
+				// A movie is popular if a large amount of people 'like' it
+				// We assume that a user likes a movie if they rate it at least 4
+				$query = "SELECT movieId, title, year, genres, COUNT(rating) as count FROM 
+				(SELECT m.movieId, m.title, m.year, m.genres, r.rating
+				FROM movies m, ratings r
+				WHERE r.movieId = m.movieId
+				AND rating >= 4) AS sub
+				WHERE title LIKE '%" . $param . "%'
+				GROUP BY movieId
+				ORDER BY count $use_order;";
+			} elseif ($order === "Alphabetical") {
+				$query = "SELECT * FROM movies WHERE title LIKE '%" . $param . "%' ORDER BY title $use_order";
+			}
+			 else {
+				$query = "SELECT * FROM movies WHERE title LIKE '%" . $param . "%'";
+			}
 		} elseif ($category === "Genre"){
-			$use_where = 'genres';
+			if ($order === "ReleaseYr"){
+				$query = "SELECT m.movieid, m.title 
+				FROM movies m, movie_genres mg, genres g 
+				WHERE m.movieId = mg.movieId AND mg.genreId = g.genreId AND g.genre LIKE '%" . $param . "%'
+				ORDER BY m.year $use_order";
+			}
+			elseif($order === "Controversy"){
+
+			}
+			elseif($order === "Popularity"){
+
+			}
+			elseif($order === "Alphabetical"){
+				$query = "SELECT m.movieid, m.title 
+				FROM movies m, movie_genres mg, genres g 
+				WHERE m.movieId = mg.movieId AND mg.genreId = g.genreId AND g.genre LIKE '%" . $param . "%'
+				ORDER BY m.title $use_order";
+			}
+			else {
+				$query = "SELECT m.movieid, m.title 
+				FROM movies m, movie_genres mg, genres g 
+				WHERE m.movieId = mg.movieId AND mg.genreId = g.genreId AND g.genre LIKE '%" . $param . "%'";
+			}
+			
 		} 
 
-		if ($order === "ReleaseYr") {
-			$query = "SELECT * FROM movies WHERE $use_where LIKE '%" . $param . "%' ORDER BY year $use_order";
-		} elseif ($order === "Controversy") {
-			// A movie is controversial if there is a high variance in its ratings
-			$query = "SELECT movieId, title, year, genres, VARIANCE(rating) as var FROM 
-			(SELECT m.movieId, m.title, m.year, m.genres, r.rating
-			FROM movies m, ratings r
-			WHERE r.movieId = m.movieId) AS sub
-			WHERE $use_where LIKE '%" . $param . "%'
-			GROUP BY movieId
-			ORDER BY var $use_order;";
-		} elseif ($order === "Popularity") {	
-			// A movie is popular if a large amount of people 'like' it
-			// We assume that a user likes a movie if they rate it at least 4
-			$query = "SELECT movieId, title, year, genres, COUNT(rating) as count FROM 
-			(SELECT m.movieId, m.title, m.year, m.genres, r.rating
-			FROM movies m, ratings r
-			WHERE r.movieId = m.movieId
-			AND rating >= 4) AS sub
-			WHERE $use_where LIKE '%" . $param . "%'
-			GROUP BY movieId
-			ORDER BY count $use_order;";
-		} elseif ($order === "Alphabetical") {
-			$query = "SELECT * FROM movies WHERE $use_where LIKE '%" . $param . "%' ORDER BY $use_where $use_order";
-		}
-		 else {
-			$query = "SELECT * FROM movies WHERE $use_where LIKE '%" . $param . "%'";
-		}
+
 
 		if ($category === "Tag") {
 			if ($order === "ReleaseYr") {

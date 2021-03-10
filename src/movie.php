@@ -50,6 +50,7 @@
 							$movie_row = $res->fetch_assoc();
 							echo "<h2>{$movie_row['title']}</h2>";
 
+							include_once('links.php');
 							include_once('genres.php');
 							include_once('ratings.php');
 							include_once('suggestions.php');

@@ -36,8 +36,8 @@ CREATE TABLE IF NOT EXISTS movie_genres (
 CREATE TABLE IF NOT EXISTS links (
     linkId int AUTO_INCREMENT,
     movieId int,
-    imdbId int DEFAULT NULL,
-    tmdbId int DEFAULT NULL,
+    imdbId varchar(255) DEFAULT NULL,
+    tmdbId varchar(255) DEFAULT NULL,
     PRIMARY KEY (linkId),
     FOREIGN KEY (movieId) REFERENCES movies(movieId)
 );

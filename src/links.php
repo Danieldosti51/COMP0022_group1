@@ -1,0 +1,20 @@
+<section id="links">
+<?php 
+	
+	// Selects all movies that users have also liked 
+	// (We assume a user likes a movie if they rate it at least 4)
+	$query_links = 
+		"SELECT imdbId, tmdbId FROM links WHERE movieId = ".$id.";";
+
+	$res = $conn -> query($query_links);
+	$row = $res->fetch_assoc();
+	$imdbId = $row['imdbId'];
+
+	// prepend 0 to id until it matches format expected in link
+	while (strlen($imdbId) < 7) $imdbId = "0".$imdbId;
+	$imdb_link = "https://www.imdb.com/title/tt".$imdbId;
+	echo "<a href={$imdb_link}>Link to IMDB</a>";
+
+
+?>	
+</section>

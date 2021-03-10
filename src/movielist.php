@@ -50,10 +50,27 @@
 				ORDER BY m.year $use_order";
 			}
 			elseif($order === "Controversy"){
-
+				$query = "SELECT movieId, title, year, VARIANCE(rating) as var FROM 
+				(SELECT m.movieId, m.title, m.year, r.rating, g.genre
+				FROM movies m, ratings r, genres g, movie_genres mg
+				WHERE r.movieId = m.movieId
+                AND m.movieId = mg.movieId
+                AND mg.genreid = g.genreid 
+                AND g.genre LIKE '%" . $param . "%') AS sub
+				GROUP BY movieId
+				ORDER BY var $use_order";
 			}
 			elseif($order === "Popularity"){
-
+				$query = "SELECT movieId, title, year, COUNT(rating) as 'count' FROM 
+				(SELECT m.movieId, m.title, m.year, r.rating, g.genre
+				FROM movies m, ratings r,genres g, movie_genres mg
+				WHERE r.movieId = m.movieId
+                AND m.movieId = mg.movieId
+                AND mg.genreid = g.genreid 
+				AND rating >= 4
+                AND g.genre LIKE '%" . $param . "%') AS sub
+				GROUP BY movieId
+				ORDER BY count $use_order";
 			}
 			elseif($order === "Alphabetical"){
 				$query = "SELECT m.movieid, m.title 

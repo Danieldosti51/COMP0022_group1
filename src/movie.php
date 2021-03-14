@@ -39,7 +39,7 @@
 				</ul>
 					<?php 
 						echo "<div class =\"row \">";
-						$id = $_REQUEST['id'];
+						$id = mysqli_real_escape_string($conn, $_REQUEST['id']);
 						$res = $conn -> query("SELECT * FROM movies WHERE movieId = $id");
 						if ($res->num_rows == 0) {
 							echo "<div class=\"bg-light w-100\">";

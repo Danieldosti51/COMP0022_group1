@@ -1,8 +1,6 @@
 <section id="links">
 <?php 
 	
-	// Selects all movies that users have also liked 
-	// (We assume a user likes a movie if they rate it at least 4)
 	$query_links = 
 		"SELECT imdbId, tmdbId FROM links WHERE movieId = ".$id.";";
 

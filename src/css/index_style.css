@@ -1,8 +1,9 @@
 
-table {
+table, tr {
     margin-top: 110px;
     width: 100%;
     background-color: rgb(255, 255, 255);
+
 }
 
 tr:nth-child(even) {

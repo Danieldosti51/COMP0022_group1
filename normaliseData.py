@@ -77,7 +77,7 @@ def trucate_year_out_of_title(df):
             df.at[i,"year"] = year_of_publication
         else:
             df.at[i,"title"] = title
-            df.at[i,"year"] = '\N'
+            df.at[i,"year"] = '/N'
     df.to_csv('Dataset/normalised_movies.csv',index = False)
     
 #1.2
@@ -85,8 +85,8 @@ def create_new_table_for_genres():
     df_g.to_csv('Dataset/genreID_to_genreName.csv',index = False,header = "genres")
         
 #1.3.2
-def create_table_movieID_to_genreName():
-    cols =["movie ID","genre ID"]
+def create_table_movieID_to_genreId():
+    cols =["movieId","genreId"]
     #cols =["movie ID","genre name"]
     df_mID_gID = pd.DataFrame(columns = cols)
     #df read the movie.csv
@@ -108,7 +108,7 @@ def create_table_movieID_to_genreName():
                 #print(new_df)
                 df_mID_gID=pd.concat([df_mID_gID,new_df])
                 
-    df_mID_gID.to_csv('Dataset/movieID_to_genreID.csv',index = False)
+    df_mID_gID.to_csv('Dataset/movieId_to_genreId.csv',index = False)
     
 #1.3.1
 def remove_genres_in_normalised_movies_file():
@@ -120,7 +120,7 @@ def remove_genres_in_normalised_movies_file():
 #do genres 1.2&1.3 first then year 1.1
 trucate_year_out_of_title(df)
 create_new_table_for_genres()
-create_table_movieID_to_genreName()
+create_table_movieID_to_genreId()
 remove_genres_in_normalised_movies_file()
 print('end')
 

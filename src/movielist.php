@@ -78,13 +78,13 @@
 				ORDER BY count $use_order";
 			}
 			elseif($order === "Alphabetical"){
-				$query = "SELECT m.movieid, m.title 
+				$query = "SELECT m.movieId, m.title 
 				FROM movies m, movie_genres mg, genres g 
 				WHERE m.movieId = mg.movieId AND mg.genreId = g.genreId AND g.genre LIKE ?
 				ORDER BY m.title $use_order";
 			}
 			else {
-				$query = "SELECT m.movieid, m.title 
+				$query = "SELECT m.movieId, m.title 
 				FROM movies m, movie_genres mg, genres g 
 				WHERE m.movieId = mg.movieId AND mg.genreId = g.genreId AND g.genre LIKE ?
 				ORDER BY movieId $use_order";

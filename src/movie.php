@@ -51,6 +51,7 @@
 									include_once('year.php');
 									include_once('genres.php');
 									include_once('ratings.php');
+									include_once('tags.php');
 									include_once('links.php');
 								?>	
 							</div>

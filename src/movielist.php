@@ -49,9 +49,10 @@
 			}
 		} elseif ($category === "Genre"){
 			if ($order === "ReleaseYr"){
-				$query = "SELECT m.movieid, m.title 
+				$query = "SELECT m.movieId, m.title 
 				FROM movies m, movie_genres mg, genres g 
 				WHERE m.movieId = mg.movieId AND mg.genreId = g.genreId AND g.genre LIKE ?
+				GROUP BY m.movieId
 				ORDER BY m.year $use_order";
 			}
 			elseif($order === "Controversy"){
@@ -81,12 +82,14 @@
 				$query = "SELECT m.movieId, m.title 
 				FROM movies m, movie_genres mg, genres g 
 				WHERE m.movieId = mg.movieId AND mg.genreId = g.genreId AND g.genre LIKE ?
+				GROUP BY m.movieId
 				ORDER BY m.title $use_order";
 			}
 			else {
 				$query = "SELECT m.movieId, m.title 
 				FROM movies m, movie_genres mg, genres g 
 				WHERE m.movieId = mg.movieId AND mg.genreId = g.genreId AND g.genre LIKE ?
+				GROUP BY m.movieId
 				ORDER BY movieId $use_order";
 			}
 			

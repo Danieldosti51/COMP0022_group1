@@ -12,6 +12,7 @@
 	while ($genre_row = $res_genres->fetch_assoc()) $genres[] = trim($genre_row['genre']);
 
 	$genre_str = implode(", ", $genres);
-	echo "<span id=genres>$genre_str</span>";
+	echo "<h4>Generes:</h4>";
+	echo "<p><span id=genres>$genre_str</span></p>";
 
 ?>

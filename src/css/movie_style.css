@@ -1,7 +1,12 @@
-h2 {
-    padding-left: 100px;
+/* not active */
+.nav-pills .nav-link:not(.active) {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }
-.content {
-    margin-top: 110px;
-    width: 100%;
+
+/* active (faded) */
+.nav-pills .nav-link.active {
+    background-color: rgba(52, 52, 52, 0.488);
+    color: white;
 }
+

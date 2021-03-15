@@ -1,13 +1,16 @@
 <article id="movies">
 <?php 
 	$query = "SELECT * FROM movies";
+	$default_set = 1;
+	$stmt = mysqli_stmt_init($conn);
 	if (isset($_REQUEST['q'])) {
 		$order = mysqli_real_escape_string($conn, $_REQUEST['Order']);
 		$category = $_REQUEST['Searchby'];
 		$asds = $_REQUEST['AsDs'];
 		$param = '%'.$_REQUEST['q'].'%';
 
-		$stmt = mysqli_stmt_init($conn);
+		// toggle flag
+		$default_set = 0;
 
 		if ($asds === "Ascend") {
 			$use_order = 'ASC';
@@ -124,7 +127,7 @@
 	if (!mysqli_stmt_prepare($stmt, $query)) {
 		echo mysqli_stmt_error($stmt);
 	} else {
-		mysqli_stmt_bind_param($stmt, "s", $param);
+		if (!$default_set) mysqli_stmt_bind_param($stmt, "s", $param);
 		mysqli_stmt_execute($stmt);
 		$res = mysqli_stmt_get_result($stmt);
 		echo "<div class=\"table-responsive\">";

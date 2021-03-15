@@ -41,7 +41,7 @@
 
 	$res_tags = $conn -> query($tag_query);
 	if ($res_tags->num_rows != 0) {
-		echo "<h4>Viewers who likes this movie also likes the following types of movie:</h4>";
+		echo "<h4>Viewers who like this movie also likes the following types of movie:</h4>";
 		while ($row = $res_tags->fetch_assoc()) {
 			echo 
 			"<section class='tag_suggestion'>
@@ -64,7 +64,7 @@
 
 	$res_tags_2 = $conn -> query($tag_query_2);
 	if ($res_tags_2->num_rows != 0) {
-		echo "<h4>Viewers who dislikes this movie likes the following types of movie:</h4>";
+		echo "<h4>Viewers who dislike this movie likes the following types of movie:</h4>";
 		while ($row = $res_tags_2->fetch_assoc()) {
 			echo 
 			"<section class='tag_suggestion'>

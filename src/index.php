@@ -19,7 +19,7 @@
 	<body>
 		<main>
 			<div class="container-fluid">
-				<div class="row">
+				<div class="row" style="padding-bottom: 10px">
 					<nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top w-100 py-4">
 						<a class="navbar-brand" href="#"><h1>Movies</h1></a>
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,8 +55,10 @@
 						</div>
 					</nav>
 				</div>
+					
 			</div>
 			<?php include_once("movielist.php") ?>
+			
 		</main>
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

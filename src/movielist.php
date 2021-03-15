@@ -127,8 +127,12 @@
 		mysqli_stmt_bind_param($stmt, "s", $param);
 		mysqli_stmt_execute($stmt);
 		$res = mysqli_stmt_get_result($stmt);
+		$no_res = $res->num_rows;
 		echo "<div class=\"table-responsive\">";
 		echo "<table>";
+		echo "<tr>";
+		echo "<td><h4 class=\"text-danger pl-4\">{$no_res} results found </h4></td>"; 
+		echo "</tr>";
 		while ($row = $res->fetch_assoc()) {
 			$id = $row['movieId'];
 			$link = "/movie.php?id=$id";

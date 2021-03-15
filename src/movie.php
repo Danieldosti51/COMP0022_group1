@@ -17,7 +17,7 @@
 		<main>
 			<div class = "container-fluid">
 				<div class ="row">
-					<nav class="navbar navbar-expand-sm navbar-dark bg-dark position-fixed w-100 py-4">
+					<nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top w-100 py-4">
 						<a class="navbar-brand" href="#"><h1>
 							<?php 
 							$id = $_REQUEST['id'];

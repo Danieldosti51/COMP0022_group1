@@ -20,7 +20,7 @@
 		<main>
 			<div class="container-fluid">
 				<div class="row">
-					<nav class="navbar navbar-expand-sm navbar-dark bg-dark position-fixed w-100 py-4">
+					<nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top w-100 py-4">
 						<a class="navbar-brand" href="#"><h1>Movies</h1></a>
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon"></span>

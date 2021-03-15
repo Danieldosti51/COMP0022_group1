@@ -9,6 +9,6 @@
 			$total += $row['rating'];
 		}
 		$avg = number_format($total / $rows, 2);
-		echo "<p>Average rating: $avg</p>";
+		echo "<h4>Average rating:</h4><p> $avg</p>";
 	?>
 </section>

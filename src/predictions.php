@@ -10,7 +10,7 @@
 	$res_avg = $conn -> query($pred_rating_query);
 	if ($res_avg->num_rows != 0) {
 		$row = $res_avg->fetch_assoc();
-		if ($row['average'] != NULL) echo "<h2>Predicted average rating: {$row['average']}</h2>";
+		if ($row['average'] != NULL) echo "<h4>Predicted average rating: </h4> <p>{$row['average']}</p>";
 	}
 
 	$pred_tag_query = 
@@ -23,7 +23,7 @@
 
 	$res_tags_pred = $conn -> query($pred_tag_query);
 	if ($res_tags_pred->num_rows != 0) {
-		echo "<h3>Predicted tags from sample audience:</h3>";
+		echo "<h4>Predicted tags from sample audience:</h4>";
 		while ($tag_row = $res_tags_pred->fetch_assoc()) {
 			echo 
 			"<section class='tag_prediction'>

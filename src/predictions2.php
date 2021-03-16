@@ -36,47 +36,40 @@
     $res_genres_of_each_movie = $conn -> query($query_movieId_genreId);
 
     //loop through movies.cvs
-    if ($res_movies->num_rows != 0) {
+
+    while($row_genres_A = $conn -> query("SELECT * FROM movies;")-> fetch_assoc()){
+        //get the movieID
+        $movieId_A = $row_genres_A['movieId'];
+        //get the genres of the movie from the server
+        $res_genres_of_movie_A = $conn ->query("SELECT genreId FROM movieId_genreId mg WHERE movieId = $movieId_A";);
         //store movie genres in a array
-        while($row_genres_A = $res_movies->fetch_assoc()){
-            //get the movieID
-            $movieId = $row_genres_A['movieId'];
-            //get the genres of the movie from the server
-            $res_genres_of_movie_A = $conn ->query($query_movieId_genreId);
-            //turn the result to an associative
-            $genreId_A = $res_genres_of_movie_A->fetch_assoc();
-            
-            //in the current movie, a drop down list contains userIds from 1 to 100
-            //for a selective group of users: from userId 1 to userId 100
-            while($row_userId = $res_userId_100->fetch_assoc()){
-                //find all the rating for current user, e.g. userId 1
-                if ($res_ratings->num_rows != 0) {
-                    echo "<h4>This user might give a rating of:</h4>";
-                    while ($row_ratings = $res_ratings->fetch_assoc()) {
-                        //delete temp, just use SELECT WHERE userId = userID
-                        // $Dictionary=[];
-                        // $userId = $row_['userId'];
-                        // &temp = userId;
-                        //loop if userId does not change
-                        if($userId == $temp)
-                            while(){
-                                //get the movieId
-                                $movieId = $row_ratings['movieId'];
-                                $count_genre_matches= 0;
-                                while($row_genres = $res_genres_of_each_movie->fetch_assoc())
-                                    //store rated movied genre in an array
-                                    $genre_B = $row_genres['genreId'];
-                                    //compare 
-                                    $matches=count(array_intersect($genre_A,$genre_B));
-                                    $count_genre_matches=$matches;
-                                    //store pair in a associative array
-                                    $array.append('$movieId','Number_of_matches');
-                                    // Movi
-                        }
-                        $predict_rating = max[array];
+        //turn the result to an associative
+        $genreId_A = $res_genres_of_movie_A->fetch_assoc();
+        
+        //in the current movie, a drop down list contains userIds from 1 to 100
+        //for a selective group of users: from userId 1 to userId 100
+        for($userId;$userId<=100;$userId++){
+            //find all the rating for current user, e.g. userId 1
+            echo "<h4>This user might give a rating of:</h4>";
+            while ($row_ratings = $conn -> query("SELECT userId, movieId FROM ratings WHERE userId = $row_userId;") -> fetch_assoc()) {
+                    foreach($row as $movieid => $rating){
+                        //get the movieId
+                        $movieId_B = $row_ratings['movieId'];
+                        $count_genre_matches= 0;
+                        while($row_genres = $conn -> query("SELECT genreId FROM movieId_genreId mg WHERE movieId = $movieId_B";)->fetch_assoc())
+                            //store rated movied genre in an array
+                            $genre_B = $row_genres['genreId'];
+                            //compare 
+                            $matches=count(array_intersect($genre_A,$genre_B));
+                            $count_genre_matches=$matches;
+                            //store pair in a associative array
+                            $array.append('$movieId','Number_of_matches');
+                            // Movi
                     }
+                $predict_rating = max[array];
                 }
             }
         }
+    }
 ?>	
 </article>

@@ -53,6 +53,7 @@
 									include_once('ratings.php');
 									include_once('tags.php');
 									include_once('links.php');
+                                    include_once('predictions2.php');
 								?>	
 							</div>
 							<div class="tab-pane fade" id="v-pills-suggest" role="tabpanel" aria-labelledby="v-pills-suggest-tab">

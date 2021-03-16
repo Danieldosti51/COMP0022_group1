@@ -1,7 +1,7 @@
 version: "3.7"
 services:
     www:
-        build: .
+        image: php:8.0.2-apache
         ports:
             - "80:80"
         volumes:
@@ -11,6 +11,13 @@ services:
         depends_on:
             - db
         command: "/bin/sh -c 'docker-php-ext-install mysqli && exec docker-php-entrypoint apache2-foreground'"
+        deploy:
+            mode: replicated
+            replicas: 3
+            placement:
+                constraints: [node.role == manager]
+            restart_policy:
+                condition: on-failure
 
     db:
         image: mysql:latest
@@ -29,6 +36,9 @@ services:
             - ./data.sql:/docker-entrypoint-initdb.d/2_data.sql
         cap_add:
             - SYS_NICE
+        deploy:
+            placement:
+                constraints: [node.role == manager]
 
     app:
         depends_on:

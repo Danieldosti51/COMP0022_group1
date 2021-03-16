@@ -19,15 +19,15 @@
 	<body>
 		<main>
 			<div class="container-fluid">
-				<div class="row" style="padding-bottom: 10px">
-					<nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top w-100 py-4">
+				<div class="row" style="padding-bottom: 5px">
+					<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top w-100 py-4">
 						<a class="navbar-brand" href="#"><h1>Movies</h1></a>
-						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon"></span>
 
 						</button>
 
-						<div class="collapse navbar-collapse " id="navbarsExample03">
+						<div class="collapse navbar-collapse " id="navbars">
 							<ul class="navbar-nav mr-auto">
 							</ul>
 							<form class="form-inline my-2 my-lg-0" name="searchbar" method="get">

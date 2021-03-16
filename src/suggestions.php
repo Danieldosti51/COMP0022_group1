@@ -22,7 +22,7 @@
 			$link = "/movie.php?id=$movie_id";
 			echo 
 			"<section class='movie_suggestion'>
-				<a href={$link}>{$row['title']}</a>
+				<p><a href={$link}>{$row['title']}</a></p>
 			</section>";
 		}	
 	}

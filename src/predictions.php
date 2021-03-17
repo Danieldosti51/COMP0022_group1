@@ -12,7 +12,7 @@
 		echo "<h4>Predicted average rating: </h4>";
 		$row = $res_avg->fetch_assoc();
 		if ($row['average'] != NULL) {
-			 echo "<p>{$row['average']}</p>";
+			 echo "<p>{$row['average']} / 5</p>";
 		} else {
 			echo "<p class=\"text-danger\">Not available due to limited information</p>";
 		}

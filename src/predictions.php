@@ -9,9 +9,14 @@
 
 	$res_avg = $conn -> query($pred_rating_query);
 	if ($res_avg->num_rows != 0) {
+		echo "<h4>Predicted average rating: </h4>";
 		$row = $res_avg->fetch_assoc();
-		if ($row['average'] != NULL) echo "<h4>Predicted average rating: </h4> <p>{$row['average']}</p>";
-	}
+		if ($row['average'] != NULL) {
+			 echo "<p>{$row['average']}</p>";
+		} else {
+			echo "<p class=\"text-danger\">Not available due to limited information</p>";
+		}
+	} 
 
 	$pred_tag_query = 
 		"SELECT t.tag, COUNT(t.tag) AS freq
@@ -22,14 +27,16 @@
 		ORDER BY freq DESC;";
 
 	$res_tags_pred = $conn -> query($pred_tag_query);
+	echo "<h4>Predicted tags from sample audience:</h4>";
 	if ($res_tags_pred->num_rows != 0) {
-		echo "<h4>Predicted tags from sample audience:</h4>";
 		while ($tag_row = $res_tags_pred->fetch_assoc()) {
 			echo 
 			"<section class='tag_prediction'>
 				<p>{$tag_row['tag']}</p>
 			</section>";
 		}	
+	} else {
+		echo "<p class=\"text-danger\"> Not available due to limited information</p>";
 	}
 
 ?>	
